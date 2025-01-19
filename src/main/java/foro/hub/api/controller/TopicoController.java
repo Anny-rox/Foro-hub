@@ -1,6 +1,7 @@
 package foro.hub.api.controller;
 
 import foro.hub.api.domain.topico.*;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +14,28 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/topicos")
+@SecurityRequirement(name = "bearer-key")
 public class TopicoController {
 
   @Autowired
-  TopicoRepository topicoRepository;
+  private TopicoRepository topicoRepository;
 
   @PostMapping
-  public ResponseEntity<DatosRespuestaTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder) {
+  public ResponseEntity<DatosRespuestaRegistroTopico> registrarTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico, UriComponentsBuilder uriComponentsBuilder) {
     Topico topico = topicoRepository.save(new Topico(datosRegistroTopico));
-    DatosRespuestaTopico datosRespuestaTopico=new DatosRespuestaTopico(
-        topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFecha(), topico.getAutor(), topico.getCurso());
+    DatosRespuestaRegistroTopico datosRespuestaRegistroTopico=new DatosRespuestaRegistroTopico(
+        topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFechaDeCreacion(),topico.getAutor(), topico.getCurso());
     URI url = uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
-    return ResponseEntity.created(url).body(datosRespuestaTopico);
+    return ResponseEntity.created(url).body(datosRespuestaRegistroTopico);
 
   }
 
   @GetMapping
-  public ResponseEntity<Page<DatosListadoTopico>> listarTopicos(@PageableDefault(size = 10, sort = "fecha", direction = Sort.Direction.ASC) Pageable paginacion) {
+  public ResponseEntity<Page<DatosListadoTopico>> listarTopicos(@PageableDefault(size = 10, sort = "fechaDeCreacion", direction = Sort.Direction.ASC) Pageable paginacion) {
       return ResponseEntity.ok(topicoRepository.findAll(paginacion)
           .map(DatosListadoTopico::new));
   }
@@ -51,7 +52,7 @@ public class TopicoController {
       Topico topico = topicoOpcional.get();
       topico.actualizarDatos(datosActualizarTopico);
       return ResponseEntity.ok(new DatosRespuestaTopico(
-          topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFecha(), topico.getAutor(), topico.getCurso()));//200
+          topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFechaDeCreacion(),topico.getFechaDeUltimaActualizacion(), topico.getAutor(), topico.getCurso()));//200
     } else {
       return ResponseEntity.notFound().build();
     }
@@ -75,7 +76,7 @@ public class TopicoController {
   public ResponseEntity<DatosRespuestaTopico> retornaDatos(@PathVariable Long id) {
     Topico topico = topicoRepository.getReferenceById(id);
     var datosTopico = new DatosRespuestaTopico(
-        topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFecha(), topico.getAutor(), topico.getCurso());
+        topico.getId(), topico.getTitulo(), topico.getMensaje(),topico.getFechaDeCreacion(),topico.getFechaDeUltimaActualizacion() ,topico.getAutor(), topico.getCurso());
     return ResponseEntity.ok(datosTopico);
   }
 

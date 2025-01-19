@@ -6,14 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 public record DatosActualizarTopico(
-    @NotNull
-    Long id,
     @NotBlank
     String titulo,
     @NotBlank
     String mensaje,
-    @NotNull
-    LocalDateTime fecha,
     @NotBlank
     String autor,
     @NotBlank
