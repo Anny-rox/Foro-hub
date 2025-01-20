@@ -1,7 +1,7 @@
 # Foro Hub - API Rest
 
 ## Descripción
-**Foro Hub** es una API REST desarrollada para gestionar un foro de tópicos. Permite registrar, listar, actualizar y eliminar tópicos mediante autenticación. Diseñada como un proyecto backend, incorpora buenas prácticas de desarrollo y herramientas modernas para ofrecer una solución robusta y escalable.
+**Foro Hub** es una API REST que permite la gestión eficiente de usuarios y la interacción en foros de discusión a traves de tópicos. Con funcionalidades para crear y administrar tópicos y respuestas mediante autenticación, diseñada como un proyecto backend, incorpora buenas prácticas de desarrollo y herramientas modernas para ofrecer una solución robusta y escalable.
 
 ## Tecnologías Utilizadas
 - **Java** (JDK 17)
@@ -79,6 +79,7 @@ main
 | GET    | `/topicos/{id}`    | Mostrar un tópico específico.      |
 | PUT    | `/topicos/{id}`    | Actualizar un tópico existente.     |
 | DELETE | `/topicos/{id}`    | Eliminar un tópico.                 |
+
 
 
 ## Licencia
