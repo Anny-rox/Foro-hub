@@ -2,7 +2,7 @@ package foro.hub.api.domain.topico;
 
 import java.time.LocalDateTime;
 
-public record DatosRespuestaRegistroTopico(
+public record DatosMostrarRespuestaTopico(
     Long id,
     String titulo,
     String mensaje,

@@ -11,8 +11,6 @@ public record DatosRegistroTopico(
     @NotBlank
     String mensaje,
     @NotBlank
-    String autor,
-    @NotBlank
     String curso
 ) {
 }

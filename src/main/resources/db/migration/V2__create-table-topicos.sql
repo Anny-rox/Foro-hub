@@ -5,6 +5,7 @@ CREATE TABLE topicos (
     fecha_de_creacion TIMESTAMP NOT NULL DEFAULT NOW(),
     fecha_de_ultima_actualizacion TIMESTAMP NOT NULL DEFAULT NOW(),
     status BOOLEAN NOT NULL DEFAULT TRUE,
-    autor VARCHAR(100) NOT NULL,
-    curso VARCHAR(100) NOT NULL
-);
+    autor INT NOT NULL,
+    curso VARCHAR(100) NOT NULL,
+    CONSTRAINT fk_autor FOREIGN KEY (autor) REFERENCES usuarios (id) ON DELETE CASCADE
+    );

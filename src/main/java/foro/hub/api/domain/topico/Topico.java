@@ -1,9 +1,13 @@
 package foro.hub.api.domain.topico;
 
+import foro.hub.api.domain.respuesta.Respuesta;
+import foro.hub.api.domain.usuario.Usuario;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "Topico")
 @Table(name = "topicos")
@@ -23,18 +27,24 @@ public class Topico {
   @Column(name = "fecha_de_ultima_actualizacion")
   private LocalDateTime fechaDeUltimaActualizacion;
   private Boolean status;
-  private String autor;
   private String curso;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "autor", nullable = false)
+  private Usuario autor;
+
+  @OneToMany(mappedBy = "topico", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Respuesta> respuestas = new ArrayList<>();
 
 
-  public Topico(DatosRegistroTopico datosRegistroTopico) {
+
+  public Topico(DatosRegistroTopico datosRegistroTopico, Usuario autor) {
     this.titulo=datosRegistroTopico.titulo();
     this.mensaje=datosRegistroTopico.mensaje();
     this.fechaDeCreacion = LocalDateTime.now();
     this.fechaDeUltimaActualizacion = LocalDateTime.now();
     this.status=true;
-    this.autor=datosRegistroTopico.autor();
+    this.autor=autor;
     this.curso= datosRegistroTopico.curso();
   }
 
@@ -45,10 +55,6 @@ public class Topico {
 
     if(datosActualizarTopico.mensaje()!=null) {
       this.mensaje=datosActualizarTopico.mensaje();
-    }
-
-    if(datosActualizarTopico.autor()!=null) {
-      this.autor=datosActualizarTopico.autor();
     }
 
     if(datosActualizarTopico.curso()!=null) {

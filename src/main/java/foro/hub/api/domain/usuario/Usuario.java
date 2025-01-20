@@ -1,20 +1,21 @@
 package foro.hub.api.domain.usuario;
 
+import foro.hub.api.domain.respuesta.Respuesta;
+import foro.hub.api.domain.topico.Topico;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 @Table(name = "usuarios")
 @Entity(name = "Usuario")
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -23,8 +24,24 @@ public class Usuario implements UserDetails {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
-  private String login;
+  private String nombre;
+  @Column(name = "correo_electronico", nullable = false, unique = true)
+  private String correoElectronico;
+
   private String clave;
+
+  @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Topico> topicos = new ArrayList<>();
+
+  @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Respuesta> respuestas = new ArrayList<>();
+
+
+  public Usuario(String nombre, String correoElectronico, String clave) {
+    this.nombre = nombre;
+    this.clave = clave;
+    this.correoElectronico = correoElectronico;
+  }
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -38,7 +55,7 @@ public class Usuario implements UserDetails {
 
   @Override
   public String getUsername() {
-    return login;
+    return nombre;
   }
 
   @Override
@@ -60,4 +77,5 @@ public class Usuario implements UserDetails {
   public boolean isEnabled() {
     return true;
   }
+
 }

@@ -3,6 +3,7 @@ package foro.hub.api.infra.errores;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -29,7 +30,7 @@ public class TratadorDeErrores {
   }
   @ExceptionHandler(DataIntegrityViolationException.class)
   public ResponseEntity<String> handleConstraintViolation(DataIntegrityViolationException ex) {
-    return ResponseEntity.badRequest().body("Error: Ya existe un tópico con el mismo título o mensaje.");
+    return ResponseEntity.badRequest().body("No se puede guardar la información porque ya existe un registro con esos datos. Por favor, intenta con otros");
   }
 
 }

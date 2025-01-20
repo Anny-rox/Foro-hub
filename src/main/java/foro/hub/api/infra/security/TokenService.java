@@ -24,7 +24,7 @@ public class TokenService {
       Algorithm algorithm = Algorithm.HMAC256(apiSecret);
       return JWT.create()
           .withIssuer("foro hub")
-          .withSubject(usuario.getLogin())//username del usuario
+          .withSubject(usuario.getUsername())//username del usuario
           .withClaim("id", usuario.getId())//id del usuario
           .withExpiresAt(generarFechaExpiracion())//tiempo de validez del token
           .sign(algorithm);

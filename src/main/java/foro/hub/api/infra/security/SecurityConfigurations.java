@@ -29,7 +29,8 @@ public class SecurityConfigurations {
         .sessionManagement(session -> session
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Configurar sesiones sin estado
         .authorizeHttpRequests(authorize -> authorize
-            .requestMatchers(HttpMethod.POST, "/login").permitAll() // Permitir acceso público a /login
+            .requestMatchers(HttpMethod.POST, "/login").permitAll() // Permitir acceso publico a /login
+            .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()//perimitir acceso publico a usuarios
             .requestMatchers("/v3/api-docs/**","/swagger-ui.html","/swagger-ui/**").permitAll()//para mostrar doumentacion
             .anyRequest().authenticated() // Requiere autenticación para las demás rutas
         )

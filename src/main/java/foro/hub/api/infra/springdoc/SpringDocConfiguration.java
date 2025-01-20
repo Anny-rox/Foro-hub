@@ -21,8 +21,8 @@ public class SpringDocConfiguration {
             .addSecuritySchemes("bearer-key",
                 new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("bearer").bearerFormat("JWT")))
         .info(new Info()
-            .title("FORO HUB API")
-            .description("API Rest de la aplicación FORO HUB, que contiene las funcionalidades CRUD de topicos")
+            .title("FORO HUB API REST")
+            .description("API REST de FORO HUB, que permite la gestión eficiente de usuarios y la interacción en foros de discusión. Con funcionalidades para crear y administrar tópicos y respuestas, esta API está diseñada para fomentar la colaboración y el intercambio de ideas en un entorno digital.")
             .contact(new Contact()
                 .name("Equipo Backend")
                 .email("backend@foro.hub"))
