@@ -1,9 +1,9 @@
 # Foro Hub - API Rest
 
-:EMOJICODE💻 ## Descripción
+💻 ## Descripción
 **Foro Hub** es una API REST que permite la gestión eficiente de usuarios y la interacción en foros de discusión a traves de tópicos. Con funcionalidades para crear y administrar tópicos y respuestas mediante autenticación, diseñada como un proyecto backend, incorpora buenas prácticas de desarrollo y herramientas modernas para ofrecer una solución robusta y escalable.
 
-:EMOJICODE🛠️## Tecnologías Utilizadas 
+🛠️## Tecnologías Utilizadas 
 - **Java** (JDK 17)
 - **Spring Boot 3**
 - **PostgreSQL** (Base de datos relacional)
@@ -13,7 +13,7 @@
 - **Lombok** (Reducción de boilerplate en el código)
 - **Auth0** (Proveedor de autenticación)
 
-:EMOJICODE🚀 ## Instalación y Ejecución
+🚀 ## Instalación y Ejecución
 1. Clonar el repositorio:
    ```bash
    git clone https://github.com/Anny-rox/Foro-hub
@@ -44,7 +44,7 @@
 - Documentación interactiva con Swagger.
 - Uso de Flyway para gestión de migraciones de base de datos.
 
-:EMOJICODE🗃️ ## Estructura del Proyecto
+🗃️ ## Estructura del Proyecto
 ```
 main
 ├── java
@@ -66,12 +66,12 @@ main
     └── templates
 ```
 
-:EMOJICODE📂 ### Paquetes principales:
+📂 ### Paquetes principales:
 - **controller**: Contiene los controladores para manejar las solicitudes de la API (e.g., `TopicoController`, `AutenticacionController`).
 - **domain**: Define las entidades y DTOs del dominio del foro (e.g., `Topico`, `Usuario`).
 - **infra**: Contiene configuraciones de seguridad, manejo de errores y documentación.
 
-:EMOJICODE👉 ## Endpoints de la API
+👉 ## Endpoints de la API
 | Método | Endpoint           | Descripción                         |
 |--------|--------------------|-------------------------------------|
 | POST   | `/topicos`         | Crear un nuevo tópico.              |
@@ -82,6 +82,6 @@ main
 
 
 
-:EMOJICODE📝 ## Licencia
+📝 ## Licencia
 Este proyecto está bajo la licencia MIT. 
 
