@@ -80,9 +80,7 @@ main
 | PUT    | `/topicos/{id}`    | Actualizar un tópico existente.     |
 | DELETE | `/topicos/{id}`    | Eliminar un tópico.                 |
 
-## Pruebas
-Pronto se agregarán pruebas unitarias e integrales para validar el correcto funcionamiento de la API.
 
 ## Licencia
-Este proyecto está bajo la licencia MIT. Puedes consultar el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la licencia MIT. 
 
